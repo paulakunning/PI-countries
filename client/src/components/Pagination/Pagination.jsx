@@ -16,7 +16,6 @@ export default function Pagination({countriesPerPage, countries, pagination, cur
 
     return (
         <>
-            <h1>Pagination</h1>
             <button disabled={currentPage === 1 ? true : false} onClick={()=>handlePrevious()} > Previous </button>
             
            {/*  <button onClick={()=> pagination(currentPage)} > {currentPage}</button> */}

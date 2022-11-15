@@ -1,15 +1,23 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../../redux/actions/actions";
+import { Link } from "react-router-dom";
+import { clearDetail, getCountries } from "../../redux/actions/actions";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
+import NavBar from "../NavBar/NavBar"
+import SearchBar from "../SearchBar/SearchBar";
+import Filters from "../Filters/Filters";
+
 
 export default function Home(){
     const dispatch = useDispatch()
-    const countries = useSelector(state => state.countries)
+    let countries = useSelector(state => state.countries)
+    const filtrado = useSelector(state => state.filtered)
+    // Conservamos el estado filtrado cuando volvemos al home
+    filtrado.length ? countries = filtrado : countries = countries
     const error = useSelector(state => state.error)
-
+    const [ order, setOrder ] = useState('')
     const [ currentPage, setCurrentPage ] = useState(1)
     const [ countriesPerPage, setCountriesPerPage ] = useState(10)
     const indexOfLastCountry = currentPage * countriesPerPage
@@ -34,6 +42,13 @@ export default function Home(){
     } else if (countries.length){
         return (
             <div>
+                <NavBar/>
+                <SearchBar/>
+                <Filters 
+                setCurrentPage={setCurrentPage}
+                setOrder={setOrder}
+                currentPage={currentPage}
+                />
                 <div>
                     <Pagination 
                     countriesPerPage={countriesPerPage}
@@ -42,9 +57,14 @@ export default function Home(){
                     pagination={pagination} />
                 </div>
                 <div>
-                    <h1>Home</h1>
                     {currentCountries.map(country => {
-                        return (<Card country={country} key={country.id} />)
+                        return (
+                            <div>
+                                <Link to={'/countries/'+ country.id} >
+                                <Card country={country} key={country.id} />
+                                </Link>
+                            </div>
+                        )
                     })}
                 </div>
             </div>

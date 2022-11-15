@@ -4,8 +4,18 @@ const { Country, Activity } = require('../db.js')
 const activitiesRouter = express.Router();
 
 activitiesRouter.get('/', async (req, res) => {
-    const allActivities = await Activity.findAll({include: [Country]})
-    res.send(allActivities)
+    try {
+        const allActivities = await Activity.findAll({include: {
+            model: Country,
+            attributes: ['name'],
+            through: {
+                attributes:[]
+            }
+        }})
+        res.send(allActivities)
+    } catch (error) {
+        res.status(400).send('Oops! There are not activities created yet.')
+    }
 })
 
 activitiesRouter.post('/', async (req, res) => {

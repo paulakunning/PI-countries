@@ -15,7 +15,13 @@ countriesRouter.get('/', async (req, res) => {
                     [Op.iLike]: `%${name}%`
                 }
             }, 
-            include: [Activity]
+            include: {
+              model: Activity,
+              attributes: ['name', 'difficulty', 'duration', 'season'],
+              through: {
+                attributes:[]
+            }
+            }
         })
         res.status(200).send(countryByName)  
         } else {
@@ -29,11 +35,16 @@ countriesRouter.get('/', async (req, res) => {
 
 countriesRouter.get('/:id', async (req, res) => { 
    const { id } = req.params;
+   const countryId = id.slice(1).toUpperCase()
    try {
      if (id) {
-       let countryById = await Country.findByPk(id.toUpperCase().slice(1), {
+       let countryById = await Country.findByPk(countryId, {
          include: {
            model: Activity,
+           attributes: ['name'],
+              through: {
+                attributes:[]
+            }
          },
        });
        countryById ? res.send(countryById).status(200) : res.send('It does not exist a country with that id. Please try again').status(400)

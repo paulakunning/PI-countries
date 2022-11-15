@@ -8,7 +8,7 @@ export default function NavBar(){
                 <NavLink to='/countries' > Home </NavLink>
             </div>
             <div>
-            <NavLink to='/form'> Create activity </NavLink>
+                <NavLink to='/form'> Create activity </NavLink>
             </div>
         </div>
     )
