@@ -6,6 +6,10 @@ import NavBar from "../NavBar/NavBar"
 
 export default function Form(){
     const allCountries = useSelector((state) => state.allCountries)
+    const countries = allCountries.sort(function(a,b){
+        if(a.name > b.name) return 1
+        if(b.name > a.name) return -1
+        return 0 })
     const dispatch = useDispatch()
     const [ input, setInput ] = useState({
         name: "",
@@ -47,7 +51,6 @@ export default function Form(){
         } catch (error) {
             alert('Oops! Something went wrong. Please try again')
         }
-        
     }
 
 
@@ -126,7 +129,7 @@ export default function Form(){
                 </div>
                 <div>
                 <select onChange={(e) => handleSelect(e)} >
-                    {allCountries.map(c => (
+                    {countries.map(c => (
                         <option key={c.id} value={c.name} >{c.name}</option>
                     ))}
                 </select>
