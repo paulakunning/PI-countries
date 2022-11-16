@@ -78,9 +78,7 @@ export default function Form(){
         })
     }
 
-    function handleDisabled(){
 
-    }
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -192,7 +190,7 @@ export default function Form(){
                 </select>
                 </div>
                 <div>
-                    <button disabled={handleDisabled} > Create activity </button>
+                    <button > Create activity </button>
                 </div>
             </form>
             {input.countries?.map(el => <div>

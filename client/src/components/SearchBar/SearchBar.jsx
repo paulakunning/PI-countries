@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCountriesByName } from "../../redux/actions/actions";
 
-
 function validate(name){
     let errors = {}
     if(!name) errors.name = 'Please type a name'

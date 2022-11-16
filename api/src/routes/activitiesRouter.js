@@ -1,5 +1,6 @@
 const express = require('express')
-const { Country, Activity } = require('../db.js')
+const { Country, Activity } = require('../db.js');
+const checkData = require('../middlewares/checkData.js');
 
 const activitiesRouter = express.Router();
 
@@ -18,7 +19,7 @@ activitiesRouter.get('/', async (req, res) => {
     }
 })
 
-activitiesRouter.post('/', async (req, res) => {
+activitiesRouter.post('/', checkData, async (req, res) => {
     const { name, difficulty, duration, season, countries } = req.body;
         try {
             const newActivity = await Activity.create({name, difficulty, duration, season})
