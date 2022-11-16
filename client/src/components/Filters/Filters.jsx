@@ -44,7 +44,7 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
                 </select>
                 <select onChange={(e)=> handleFilterByActivities(e)}>
                     <option value='all' key='all'> All </option>
-                    {allActivities.map(act => (<option key={act.id} value={act.name} >{act.name}</option>))}
+                    {allActivities?.map(act => (<option key={act.id} value={act.name} >{act.name}</option>))}
                 </select>
                 <select onChange={(e)=> handleSort(e)}>
                     <option disabled value='default'> Sort countries </option>

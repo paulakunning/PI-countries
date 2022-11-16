@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { createActivity } from "../../redux/actions/actions";
+import { Link, useHistory } from "react-router-dom";
+import { createActivity, getCountries } from "../../redux/actions/actions";
 import NavBar from "../NavBar/NavBar"
+
+function validate(input){
+    let errors ={}
+    if (!input.name) {errors.name = 'Name is required'}
+    if(!/^[a-zA-Z ]*$/.test(input.name)) {errors.name = 'Name is invalid'}
+    if(input.duration < 1 || input.duration > 24) {errors.duration = 'Duration should be a numer betweeen 1 and 24'}
+    return errors
+}
 
 export default function Form(){
     const allCountries = useSelector((state) => state.allCountries)
+    // Sort countries in select option
     const countries = allCountries.sort(function(a,b){
         if(a.name > b.name) return 1
         if(b.name > a.name) return -1
         return 0 })
     const dispatch = useDispatch()
+    const history = useHistory()
+    const [ errors, setErrors ] = useState({})
     const [ input, setInput ] = useState({
         name: "",
         difficulty: 0,
@@ -18,12 +29,19 @@ export default function Form(){
         season: "",
         countries: []
     })
+    useEffect(()=> {
+        dispatch(getCountries())
+    })
 
     function handleChange(e){
         setInput({
             ...input,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
     }
 
     function handleSelect(e){   
@@ -53,12 +71,15 @@ export default function Form(){
         }
     }
 
-
     function handleDelete(el){
         setInput({
             ...input,
             countries: input.countries.filter(c => c !== el)
         })
+    }
+
+    function handleDisabled(){
+
     }
 
     async function handleSubmit(e){
@@ -73,11 +94,11 @@ export default function Form(){
                 season: "",
                 countries: []
             })
+            history.push('/countries')
         } catch (error) {
             alert('Oops! Something went wrong. Please try again')
         }
     }
-
 
     return (
         <>
@@ -107,7 +128,7 @@ export default function Form(){
                     value={1}
                     onChange={(e)=>handleCheckDif(e)}
                     />
-                    <label for='diff1' > Begginer </label>
+                    <label htmlFor='diff1' > Begginer </label>
                     <input
                     type='radio'
                     id='diff2'
@@ -115,7 +136,7 @@ export default function Form(){
                     value={2}
                     onChange={(e)=>handleCheckDif(e)}
                     />
-                    <label for='diff2' > Amateur </label>
+                    <label htmlFor='diff2' > Amateur </label>
                     <input
                     type='radio'
                     id='diff3'
@@ -123,7 +144,7 @@ export default function Form(){
                     value={3}
                     onChange={(e)=>handleCheckDif(e)}
                     />
-                    <label for='diff3' > Normal </label>
+                    <label htmlFor='diff3' > Normal </label>
                     <input
                     type='radio'
                     id='diff4'
@@ -131,7 +152,7 @@ export default function Form(){
                     value={4}
                     onChange={(e)=>handleCheckDif(e)}
                     />
-                    <label for='diff4' > Professional </label>
+                    <label htmlFor='diff4' > Professional </label>
                     <input
                     type='radio'
                     id='diff5'
@@ -139,7 +160,7 @@ export default function Form(){
                     value={5}
                     onChange={(e)=>handleCheckDif(e)}
                     />
-                    <label for='diff5' > Expert </label>
+                    <label htmlFor='diff5' > Expert </label>
                 </div>
                 <div>
                 <label> Duration: </label>
@@ -150,7 +171,7 @@ export default function Form(){
                     name="duration"
                     value={input.duration}
                     onChange={(e)=>handleChange(e)}
-                    />
+                    /> horas
                 </div>
                 <div>
                 <label> Season: </label>
@@ -171,10 +192,10 @@ export default function Form(){
                 </select>
                 </div>
                 <div>
-                    <button> Create activity </button>
+                    <button disabled={handleDisabled} > Create activity </button>
                 </div>
             </form>
-            {input.countries.map(el => <div>
+            {input.countries?.map(el => <div>
                 <img src={el} alt="" />
                 <p>{el}</p>
                 <button onClick={()=> handleDelete(el)}> x </button>
