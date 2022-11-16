@@ -10,7 +10,6 @@ export default function SearchBar(){
     function handleInputChange(e){
         e.preventDefault()
         setName(e.target.value)
-       /*  dispatch(getCountriesByName(name)) */
     }
 
     function handleSubmit(e){

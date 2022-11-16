@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { createActivity } from "../../redux/actions/actions";
 import NavBar from "../NavBar/NavBar"
 
 export default function Form(){
     const allCountries = useSelector((state) => state.allCountries)
+    const dispatch = useDispatch()
     const [ input, setInput ] = useState({
         name: "",
         difficulty: 0,
@@ -30,6 +32,24 @@ export default function Form(){
         })
     }
 
+    async function handleSubmit(e){
+        e.preventDefault();
+        try {
+            dispatch(createActivity(input))
+            alert('Activity created successfully')
+            setInput({
+                name: "",
+                difficulty: 0,
+                duration: 0,
+                season: "",
+                countries: []
+            })
+        } catch (error) {
+            alert('Oops! Something went wrong. Please try again')
+        }
+        
+    }
+
 
     return (
         <>
@@ -40,7 +60,7 @@ export default function Form(){
                     Back to home
                 </button>
             </Link>
-            <form>
+            <form onSubmit={(e)=> handleSubmit(e)}>
                 <div>
                     <label> Name: </label>
                     <input

@@ -1,4 +1,4 @@
-import { GET_COUNTRIES, ERROR, GET_DETAIL, GET_COUNTRIES_BY_NAME, GET_ACTIVITIES, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, SORT_COUNTRIES, RESET_FILTERS, RESET_DETAIL } from "../actions/actions";
+import { GET_COUNTRIES, ERROR, GET_DETAIL, GET_COUNTRIES_BY_NAME, GET_ACTIVITIES, FILTER_BY_CONTINENT, FILTER_BY_ACTIVITY, SORT_COUNTRIES, RESET_FILTERS, RESET_DETAIL, CREATE_ACTIVITY } from "../actions/actions";
 
 const initialState = {
     countries: [],
@@ -36,6 +36,11 @@ function rootReducer(state = initialState, action){
             return {
                 ...state,
                 countries: action.payload
+            }
+        }
+        case CREATE_ACTIVITY: {
+            return {
+                ...state,
             }
         }
         case FILTER_BY_CONTINENT: {

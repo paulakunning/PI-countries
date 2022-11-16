@@ -9,6 +9,7 @@ export const FILTER_BY_ACTIVITY = 'FILTER_BY_ACTIVITY'
 export const RESET_FILTERS = 'RESET_FILTERS'
 export const SORT_COUNTRIES = 'SORT_COUNTRIES'
 export const RESET_DETAIL = 'RESET_DETAIL'
+export const CREATE_ACTIVITY = 'CREATE_ACTIVITY'
 
 export function getCountries(){
     return async function(dispatch){
@@ -74,6 +75,17 @@ export function getDetail(id){
                 type:ERROR,
                 payload: error.message
             })
+        }
+    }
+}
+
+export function createActivity(payload){
+    return async function (){
+        try {
+            const response = await axios.post('http://localhost:3001/activities', payload)
+            return response
+        } catch(error){
+            return 'Ocurrió un error al crear la actividad'
         }
     }
 }
