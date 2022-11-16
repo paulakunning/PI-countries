@@ -19,6 +19,13 @@ export default function Form(){
         countries: []
     })
 
+    function handleChange(e){
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+    }
+
     function handleSelect(e){   
         const country = e.target.value
         const filterCountry = input.countries.find(c => c === country)
@@ -28,6 +35,24 @@ export default function Form(){
             countries: [...input.countries, e.target.value]
         })
     }
+    
+    function handleCheckDif(e){
+        if(e.target.checked){
+            setInput({
+                ...input,
+                difficulty: e.target.value
+            })
+        }
+    }
+    function handleCheckSeason(e){
+        if(e.target.checked){
+            setInput({
+                ...input,
+                season: e.target.value
+            })
+        }
+    }
+
 
     function handleDelete(el){
         setInput({
@@ -68,6 +93,9 @@ export default function Form(){
                     <label> Name: </label>
                     <input
                     type='text'
+                    value={input.name}
+                    name='name'
+                    onChange={(e)=> handleChange(e)}
                     />
                 </div>
                 <div>
@@ -76,35 +104,40 @@ export default function Form(){
                     type='radio'
                     id='diff1'
                     name='difficulty'
-                    value={input.difficulty}
+                    value={1}
+                    onChange={(e)=>handleCheckDif(e)}
                     />
                     <label for='diff1' > Begginer </label>
                     <input
                     type='radio'
                     id='diff2'
                     name='difficulty'
-                    value={input.difficulty}
+                    value={2}
+                    onChange={(e)=>handleCheckDif(e)}
                     />
                     <label for='diff2' > Amateur </label>
                     <input
                     type='radio'
                     id='diff3'
                     name='difficulty'
-                    value={input.difficulty}
+                    value={3}
+                    onChange={(e)=>handleCheckDif(e)}
                     />
                     <label for='diff3' > Normal </label>
                     <input
                     type='radio'
                     id='diff4'
                     name='difficulty'
-                    value={input.difficulty}
+                    value={4}
+                    onChange={(e)=>handleCheckDif(e)}
                     />
                     <label for='diff4' > Professional </label>
                     <input
                     type='radio'
                     id='diff5'
                     name='difficulty'
-                    value={input.difficulty}
+                    value={5}
+                    onChange={(e)=>handleCheckDif(e)}
                     />
                     <label for='diff5' > Expert </label>
                 </div>
@@ -114,23 +147,26 @@ export default function Form(){
                     type='number'
                     min='1'
                     max='24' 
+                    name="duration"
+                    value={input.duration}
+                    onChange={(e)=>handleChange(e)}
                     />
                 </div>
                 <div>
                 <label> Season: </label>
-                <input type="radio" id="seasonChoice1" name='season' value={input.season} />
-                <label for="seasonChoice1"> Summer </label>
-                <input type="radio" id="seasonChoice2" name='season' value={input.season} />
-                <label for="seasonChoice2"> Autumn </label>
-                <input type="radio" id="seasonChoice3" name='season' value={input.season} />
-                <label for="seasonChoice3"> Spring </label>
-                <input type="radio" id="seasonChoice4" name='season' value={input.season} />
-                <label for="seasonChoice4"> Winter </label>
+                <input type="radio" id="seasonChoice1" name='season' value={"Summer"} onChange={(e)=> handleCheckSeason(e)} />
+                <label htmlFor="seasonChoice1"> Summer </label>
+                <input type="radio" id="seasonChoice2" name='season' value={"Autumn"} onChange={(e)=> handleCheckSeason(e)} />
+                <label htmlFor="seasonChoice2"> Autumn </label>
+                <input type="radio" id="seasonChoice3" name='season' value={"Spring"} onChange={(e)=> handleCheckSeason(e)} />
+                <label htmlFor="seasonChoice3"> Spring </label>
+                <input type="radio" id="seasonChoice4" name='season' value={"Winter"} onChange={(e)=> handleCheckSeason(e)} />
+                <label htmlFor="seasonChoice4"> Winter </label>
                 </div>
                 <div>
                 <select onChange={(e) => handleSelect(e)} >
                     {countries.map(c => (
-                        <option key={c.id} value={c.name} >{c.name}</option>
+                        <option key={c.id}  name={c.name} value={c.name} > {c.name} </option>
                     ))}
                 </select>
                 </div>

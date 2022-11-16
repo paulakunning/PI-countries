@@ -11,14 +11,25 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       difficulty: {
-        type: DataTypes.ENUM('1', '2', '3', '4', '5'),
+        type: DataTypes.INTEGER,
+        validate: {
+          min:1,
+          max:5
+        },
+        allowNull: false,
       },
       duration: {
-        type: DataTypes.ENUM('1', '2', '3', '4', '5'),
+        type: DataTypes.INTEGER,
+        validate: {
+          min:1,
+          max:24
+        },
+        allowNull: false
       },
       season: {
         type: DataTypes.ENUM,
         values: ["Summer", "Autumn", "Spring", "Winter"],
+        allowNull: false
       },
     },
     { timestamps: false }

@@ -35,7 +35,6 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
 
     return (
         <div>
-            <h1>Filters</h1>
             <div>
                 <button onClick={(e)=> handleClearFilters(e)}> Clear filters </button>
             </div>
@@ -48,7 +47,7 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
                     {allActivities.map(act => (<option key={act.id} value={act.name} >{act.name}</option>))}
                 </select>
                 <select onChange={(e)=> handleSort(e)}>
-                    <option hidden value='default'> Sort countries </option>
+                    <option disabled value='default'> Sort countries </option>
                     <option value='asc' key='asc'> Name: A - Z </option>
                     <option value='desc' key='desc'> Name: Z - A </option>
                     <option value='popAsc' key='popAsc'> Population ↑  </option>
