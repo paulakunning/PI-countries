@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCountriesByName } from "../../redux/actions/actions";
+import sb from '../SearchBar/SearchBar.module.css'
+import icon from '../SearchBar/search.png'
 
 function validate(name){
     let errors = {}
@@ -28,15 +30,18 @@ export default function SearchBar(){
     }
 
     return (
-        <form onSubmit={(e)=> handleSubmit(e)}>
-            <input 
+      <div className={sb.sbContainer}>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input
             value={name}
-            type='text'
-            placeholder='Type a country'
+            type="text"
+            placeholder="Search by name"
             onChange={(e) => handleInputChange(e)}
-            
-            />
-            <button type='submit' > Search </button>
+          />
+          <button className={sb.sbBtn} type="submit">
+            <img src={icon} alt="Search icon" />
+          </button>
         </form>
-    )
+      </div>
+    );
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { createActivity, getCountries } from "../../redux/actions/actions";
 import NavBar from "../NavBar/NavBar"
+import f from "../Form/Form.module.css"
 
 function validate(input){
     let errors ={}
@@ -99,105 +100,137 @@ export default function Form(){
     }
 
     return (
-        <>
-        <NavBar/>
-            <h1>Form</h1>
-            <Link to='/countries' >
-                <button>
-                    Back to home
-                </button>
+      <>
+        <NavBar />
+        <div className={f.formBackground}>
+            <div>
+                <Link to="/countries">
+            <button className={f.backBtn} >Back to home</button>
             </Link>
-            <form onSubmit={(e)=> handleSubmit(e)}>
-                <div>
-                    <label> Name: </label>
-                    <input
-                    type='text'
-                    value={input.name}
-                    name='name'
-                    onChange={(e)=> handleChange(e)}
-                    />
-                </div>
-                <div>
+            </div>
+            <form className={f.formContainer} onSubmit={(e) => handleSubmit(e)}>
+            <h1> New activity</h1>
+            <div>
+                <label> Name: </label>
+                <input
+                type="text"
+                value={input.name}
+                name="name"
+                onChange={(e) => handleChange(e)}
+                />
+            </div>
+            <div>
                 <label> Difficulty: </label>
-                    <input
-                    type='radio'
-                    id='diff1'
-                    name='difficulty'
-                    value={1}
-                    onChange={(e)=>handleCheckDif(e)}
-                    />
-                    <label htmlFor='diff1' > Begginer </label>
-                    <input
-                    type='radio'
-                    id='diff2'
-                    name='difficulty'
-                    value={2}
-                    onChange={(e)=>handleCheckDif(e)}
-                    />
-                    <label htmlFor='diff2' > Amateur </label>
-                    <input
-                    type='radio'
-                    id='diff3'
-                    name='difficulty'
-                    value={3}
-                    onChange={(e)=>handleCheckDif(e)}
-                    />
-                    <label htmlFor='diff3' > Normal </label>
-                    <input
-                    type='radio'
-                    id='diff4'
-                    name='difficulty'
-                    value={4}
-                    onChange={(e)=>handleCheckDif(e)}
-                    />
-                    <label htmlFor='diff4' > Professional </label>
-                    <input
-                    type='radio'
-                    id='diff5'
-                    name='difficulty'
-                    value={5}
-                    onChange={(e)=>handleCheckDif(e)}
-                    />
-                    <label htmlFor='diff5' > Expert </label>
-                </div>
-                <div>
+                <input
+                type="radio"
+                id="diff1"
+                name="difficulty"
+                value={1}
+                onChange={(e) => handleCheckDif(e)}
+                />
+                <label htmlFor="diff1"> Begginer </label>
+                <input
+                type="radio"
+                id="diff2"
+                name="difficulty"
+                value={2}
+                onChange={(e) => handleCheckDif(e)}
+                />
+                <label htmlFor="diff2"> Amateur </label>
+                <input
+                type="radio"
+                id="diff3"
+                name="difficulty"
+                value={3}
+                onChange={(e) => handleCheckDif(e)}
+                />
+                <label htmlFor="diff3"> Normal </label>
+                <input
+                type="radio"
+                id="diff4"
+                name="difficulty"
+                value={4}
+                onChange={(e) => handleCheckDif(e)}
+                />
+                <label htmlFor="diff4"> Professional </label>
+                <input
+                type="radio"
+                id="diff5"
+                name="difficulty"
+                value={5}
+                onChange={(e) => handleCheckDif(e)}
+                />
+                <label htmlFor="diff5"> Expert </label>
+            </div>
+            <div>
                 <label> Duration: </label>
-                    <input
-                    type='number'
-                    min='1'
-                    max='24' 
-                    name="duration"
-                    value={input.duration}
-                    onChange={(e)=>handleChange(e)}
-                    /> horas
-                </div>
-                <div>
+                <input
+                type="number"
+                min="1"
+                max="24"
+                name="duration"
+                value={input.duration}
+                onChange={(e) => handleChange(e)}
+                />{" "}
+                horas
+            </div>
+            <div>
                 <label> Season: </label>
-                <input type="radio" id="seasonChoice1" name='season' value={"Summer"} onChange={(e)=> handleCheckSeason(e)} />
+                <input
+                type="radio"
+                id="seasonChoice1"
+                name="season"
+                value={"Summer"}
+                onChange={(e) => handleCheckSeason(e)}
+                />
                 <label htmlFor="seasonChoice1"> Summer </label>
-                <input type="radio" id="seasonChoice2" name='season' value={"Autumn"} onChange={(e)=> handleCheckSeason(e)} />
+                <input
+                type="radio"
+                id="seasonChoice2"
+                name="season"
+                value={"Autumn"}
+                onChange={(e) => handleCheckSeason(e)}
+                />
                 <label htmlFor="seasonChoice2"> Autumn </label>
-                <input type="radio" id="seasonChoice3" name='season' value={"Spring"} onChange={(e)=> handleCheckSeason(e)} />
+                <input
+                type="radio"
+                id="seasonChoice3"
+                name="season"
+                value={"Spring"}
+                onChange={(e) => handleCheckSeason(e)}
+                />
                 <label htmlFor="seasonChoice3"> Spring </label>
-                <input type="radio" id="seasonChoice4" name='season' value={"Winter"} onChange={(e)=> handleCheckSeason(e)} />
+                <input
+                type="radio"
+                id="seasonChoice4"
+                name="season"
+                value={"Winter"}
+                onChange={(e) => handleCheckSeason(e)}
+                />
                 <label htmlFor="seasonChoice4"> Winter </label>
-                </div>
-                <div>
-                <select onChange={(e) => handleSelect(e)} >
-                    {countries.map(c => (
-                        <option key={c.id}  name={c.name} value={c.name} > {c.name} </option>
-                    ))}
+            </div>
+            <div>
+                <select onChange={(e) => handleSelect(e)}>
+                {countries.map((c) => (
+                    <option key={c.id} name={c.name} value={c.name}>
+                    {" "}
+                    {c.name}{" "}
+                    </option>
+                ))}
                 </select>
-                </div>
-                <div>
-                    <button > Create activity </button>
-                </div>
+            </div>
+            <div>
+                <button className={f.submitBtn}> Create activity </button>
+            </div>
             </form>
-            {input.countries?.map(el => <div>
+            {input.countries?.map((el) => (
+            <div>
                 <img src={el} alt="" />
                 <p>{el}</p>
-                <button onClick={()=> handleDelete(el)}> x </button>
-            </div>)}
-        </>
-    )
+                <button onClick={() => handleDelete(el)}> x </button>
+            </div>
+            ))}
+        </div>
+      </>
+    );
 }

@@ -8,7 +8,8 @@ import Pagination from "../Pagination/Pagination";
 import NavBar from "../NavBar/NavBar"
 import SearchBar from "../SearchBar/SearchBar";
 import Filters from "../Filters/Filters";
-
+import h from "./Home.module.css"
+import loader from "../Home/loader.gif"
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -41,22 +42,14 @@ export default function Home(){
         )
     } else if (countries.length){
         return (
-            <div>
+            <div className={h.homeContainer}>
                 <NavBar/>
-                <SearchBar/>
                 <Filters 
                 setCurrentPage={setCurrentPage}
                 setOrder={setOrder}
                 currentPage={currentPage}
                 />
-                <div>
-                    <Pagination 
-                    countriesPerPage={countriesPerPage}
-                    currentPage={currentPage}
-                    countries={countries.length}
-                    pagination={pagination} />
-                </div>
-                <div>
+                <div className={h.cardsContainer} >
                     {currentCountries.map(country => {
                         return (
                             <div>
@@ -67,13 +60,21 @@ export default function Home(){
                         )
                     })}
                 </div>
+                <div>
+                    <Pagination 
+                    countriesPerPage={countriesPerPage}
+                    currentPage={currentPage}
+                    countries={countries.length}
+                    pagination={pagination} />
+                </div>
             </div>
         )
     } else {
         return (
-            <>
+            <div className={h.loader}>
+                {/* <img src={loader} alt="" /> */}
                 <h1>Loading...</h1>
-            </>
+            </div>
         )
     }
 

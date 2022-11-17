@@ -1,7 +1,5 @@
-import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import Home from './components/Home/Home';
-
 import Form from './components/Form/Form';
 import Detail from './components/CardDetail/CardDetail';
 import Landing from './components/Landing/Landing';

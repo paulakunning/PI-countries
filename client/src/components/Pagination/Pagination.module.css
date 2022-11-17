@@ -1,0 +1,27 @@
+.pagContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+.pageBtn {
+    transition: background-color .3s;
+    padding: 0.8rem;
+    background-color: transparent;
+    color: #9fd3c7;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    border: 1px solid white;
+    outline: none;
+}
+.pageBtn:focus {
+        color: white;
+        background-color: #385170;
+    }
+
+.pageBtn:hover:not(.active) {
+    background-color: #142d4c;
+    color: white;
+    cursor: pointer;
+}

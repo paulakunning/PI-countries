@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByContinent, getActivities, filterByActivity, clearFilters, getCountries, sortCountries } from "../../redux/actions/actions";
+import fi from '../Filters/Filters.module.css'
 
 export default function Filters({setCurrentPage, currentPage, setOrder}){
     const dispatch = useDispatch()
@@ -34,10 +35,7 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
     }
 
     return (
-        <div>
-            <div>
-                <button onClick={(e)=> handleClearFilters(e)}> Clear filters </button>
-            </div>
+        <div className={fi.filters}>
             <div>
                 <select onChange={(e)=>handleFilterByContinent(e)} >
                 {continentOptions.map(c => (<option key={c} value={c} >{c}</option>))}
@@ -53,6 +51,9 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
                     <option value='popAsc' key='popAsc'> Population ↑  </option>
                     <option value='popDesc' key='popDesc'> Population ↓ </option>
                 </select>
+            </div>
+            <div>
+                <button onClick={(e)=> handleClearFilters(e)}> Clear filters </button>
             </div>
         </div>
     )

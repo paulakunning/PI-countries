@@ -15,7 +15,6 @@ export default function Detail(props){
 
     return (
         <>
-        
         <div>
             <h1>{country.name}</h1>
             <h1>{country.id}</h1>
@@ -26,8 +25,6 @@ export default function Detail(props){
             <p> Activities: {country.activities?.map(el => el["name"])}</p>
             <img src={country.flag} />
         </div>
-
-    
         </>
     )
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import p from "../Pagination/Pagination.module.css"
 
 export default function Pagination({countriesPerPage, countries, pagination, currentPage}){
     const pageNumbers = []
@@ -15,15 +16,11 @@ export default function Pagination({countriesPerPage, countries, pagination, cur
     }
 
     return (
-        <>
+        <div className={p.pagContainer}>
             <button disabled={currentPage === 1 ? true : false} onClick={()=>handlePrevious()} > Previous </button>
-            
-           {/*  <button onClick={()=> pagination(currentPage)} > {currentPage}</button> */}
-           {/* <button>{currentPage}</button> */}
             {pageNumbers && pageNumbers.map( n => (
-                <button key={n} onClick={()=> pagination(n)} > {n} </button>
-            ))}
+                <button className={p.pageBtn} key={n} onClick={()=> pagination(n)} > {n} </button>))}
             <button disabled={currentPage === pageNumbers.length ? true : false} onClick={()=>handleNext()} > Next </button>
-        </>
+        </div>
     )
 }

@@ -1,0 +1,36 @@
+.navContainer{
+   padding: 1rem;
+    height: 2.5rem;
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    background-color: #9fd3c7;
+    top: 0;
+}
+.linksContainer {
+    display: flex;
+}
+
+.links > a {
+    font-family: 'Montserrat', sans-serif;
+     font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    padding: 1rem;
+}
+.links > a:active, .links > a:focus, .links > a:hover {
+    color: #142d4c;
+}
+
+/* .navContainer > a:focus {
+    color: red;
+}
+.navContainer > a:hover {
+    color: #142d4c;
+} */
+/* .navContainer > a:focus, a::after, a:active{
+    color: red;
+} */
+

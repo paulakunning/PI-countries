@@ -1,0 +1,16 @@
+.homeContainer {
+    background-color: white;
+    height: 100vh;
+}
+.cardsContainer {
+    margin: 1rem;
+    display: flex;
+    flex-wrap: wrap;    
+    justify-content: space-around;
+    padding: 2rem;
+}
+.loader {
+    padding-top: 20rem;
+    display: flex;
+    justify-content: center;
+}
