@@ -22,7 +22,7 @@ export default function Detail(props){
             <p>{country.subregion}</p>
             <p> Area: {new Intl.NumberFormat().format(country.area)} km² </p>
             <p> Population: {new Intl.NumberFormat().format(country.population)}</p>
-            <p> Activities: {country.activities?.map(el => el["name"])}</p>
+             {country.activities !== undefined ? country.activities.map(el => <p> { el["name"]}</p>) : (<p> "no tiene actividad"</p>)}
             <img src={country.flag} />
         </div>
         </>

@@ -17,10 +17,10 @@ export default function Pagination({countriesPerPage, countries, pagination, cur
 
     return (
         <div className={p.pagContainer}>
-            <button disabled={currentPage === 1 ? true : false} onClick={()=>handlePrevious()} > Previous </button>
+            <button className={p.prevBtn} disabled={currentPage === 1 ? true : false} onClick={()=>handlePrevious()} >  {"< Prev"} </button>
             {pageNumbers && pageNumbers.map( n => (
                 <button className={p.pageBtn} key={n} onClick={()=> pagination(n)} > {n} </button>))}
-            <button disabled={currentPage === pageNumbers.length ? true : false} onClick={()=>handleNext()} > Next </button>
+            <button className={p.backBtn} disabled={currentPage === pageNumbers.length ? true : false} onClick={()=>handleNext()} > {"Next >"} </button>
         </div>
     )
 }
