@@ -3,6 +3,7 @@ import { GET_COUNTRIES, ERROR, GET_DETAIL, GET_COUNTRIES_BY_NAME, GET_ACTIVITIES
 const initialState = {
     countries: [],
     allCountries:[],
+    formCountries: [],
     detail: [],
     activities: [],
     filtered: [],
@@ -15,7 +16,8 @@ function rootReducer(state = initialState, action){
             return {
                 ...state,
                 countries: action.payload,
-                allCountries: action.payload
+                allCountries: action.payload,
+                formCountries: action.payload
             }
         case GET_ACTIVITIES:
             return {

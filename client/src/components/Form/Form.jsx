@@ -14,7 +14,7 @@ function validate(input){
 }
 
 export default function Form(){
-    const allCountries = useSelector((state) => state.allCountries)
+    const allCountries = useSelector((state) => state.formCountries)
     // Sort countries in select option
     const countries = allCountries.sort(function(a,b){
         if(a.name > b.name) return 1
