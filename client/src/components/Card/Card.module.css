@@ -1,6 +1,6 @@
 .card {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     padding: 1.5rem;
     margin: 1rem;
     background: #ececec;
@@ -11,10 +11,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 .card:hover {
-    opacity: 0.8;
-    transform: scale(1.10);
+    transform: scale(1.05);
+    border: 2px solid #9fd3c7;
 }
 .card > img {
 max-width: 200px;
@@ -22,4 +23,7 @@ max-height: 100px;
 }
 .card > h2 {
     padding: 0.8rem;
+}
+.card > p {
+    font-weight: bold;
 }

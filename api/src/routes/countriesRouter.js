@@ -8,6 +8,7 @@ const { Country, Activity } = require('../db.js')
 countriesRouter.get('/', async (req, res) => {
     const { name } = req.query
     try {
+      const allCountries = await getApiInfo()
         if(name){
            let countryByName = await Country.findAll({
             where: {
@@ -25,7 +26,7 @@ countriesRouter.get('/', async (req, res) => {
         })
         res.status(200).send(countryByName)  
         } else {
-                const allCountries = await getApiInfo()
+                
                 res.status(200).send(allCountries) 
         }
     } catch (error) {
@@ -34,23 +35,27 @@ countriesRouter.get('/', async (req, res) => {
 })
 
 countriesRouter.get('/:id', async (req, res) => { 
-   const { id } = req.params;
+   const {id}  = req.params
    const countryId = id.slice(1).toUpperCase()
-   try {
-     if (id) {
-       let countryById = await Country.findByPk(countryId, {
-         include: {
-           model: Activity,
-           attributes: ['name'],
-              through: {
-                attributes:[]
-            }
-         },
-       });
-       countryById ? res.send(countryById).status(200) : res.send('It does not exist a country with that id. Please try again').status(400)
-     }
-   } catch (error) {
-     res.send(error.message).status(400);
+
+   if(!countryId) {return res.send('ID is required').status(400)}
+   if (countryId && countryId.length === 3) {
+    try {
+      let countryById = await Country.findByPk(countryId, {
+        include: {
+          model: Activity,
+          attributes: ['name'],
+             through: {
+               attributes:[]
+           }
+        },
+      });
+      countryById ? res.send(countryId).status(200) : res.send('It does not exist a country with that id. Please try again').status(400)
+    } catch (error) {
+      return res.send(error.message).status(400);
+    }
+   } else {
+    return res.send('It does not exist a country with that id. Please try again').status(400)
    }
 })
 

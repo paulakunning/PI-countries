@@ -35,12 +35,14 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
     }
 
     return (
-        <div className={fi.filters}>
-            <div>
+        <div className={fi.filtersContainer}>
+            <div className={fi.filters}>
                 <select onChange={(e)=>handleFilterByContinent(e)} >
+                <option disabled value='default'> Filter by continent </option>
                 {continentOptions.map(c => (<option key={c} value={c} >{c}</option>))}
                 </select>
                 <select onChange={(e)=> handleFilterByActivities(e)}>
+                <option disabled value='default'> Filter by activity </option>
                     <option value='all' key='all'> All </option>
                     {allActivities?.map(act => (<option key={act.id} value={act.name} >{act.name}</option>))}
                 </select>
@@ -52,8 +54,8 @@ export default function Filters({setCurrentPage, currentPage, setOrder}){
                     <option value='popDesc' key='popDesc'> Population ↓ </option>
                 </select>
             </div>
-            <div>
-                <button onClick={(e)=> handleClearFilters(e)}> Clear filters </button>
+            <div className={fi.clearBtnContainer}>
+                <button className={fi.clearBtn} onClick={(e)=> handleClearFilters(e)}> Clear filters </button>
             </div>
         </div>
     )

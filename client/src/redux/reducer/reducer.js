@@ -94,6 +94,12 @@ function rootReducer(state = initialState, action){
                 detail: []
             }
         }
+      /*   case RESET_FORM: {
+            return {
+                ...state, 
+                filtered: []
+            }
+        } */
     
         default:
             return {...state}

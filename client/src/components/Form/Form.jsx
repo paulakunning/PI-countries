@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { createActivity, getCountries } from "../../redux/actions/actions";
+import { clearFilters, createActivity, getCountries, sortCountries } from "../../redux/actions/actions";
 import NavBar from "../NavBar/NavBar"
 import f from "../Form/Form.module.css"
 
@@ -14,12 +14,7 @@ function validate(input){
 }
 
 export default function Form(){
-    const allCountries = useSelector((state) => state.formCountries)
-    // Sort countries in select option
-    const countries = allCountries.sort(function(a,b){
-        if(a.name > b.name) return 1
-        if(b.name > a.name) return -1
-        return 0 })
+    const allCountries = useSelector((state) => state.allCountries)
     const dispatch = useDispatch()
     const history = useHistory()
     const [ errors, setErrors ] = useState({})
@@ -32,6 +27,8 @@ export default function Form(){
     })
     useEffect(()=> {
         dispatch(getCountries())
+        dispatch(sortCountries())
+        return ()=> {dispatch(clearFilters())}
     })
 
     function handleChange(e){
@@ -78,14 +75,15 @@ export default function Form(){
             countries: input.countries.filter(c => c !== el)
         })
     }
+    const handleDisabled = () => {
+        if (!input.name || !input.difficulty || !input.duration || !input.season || !input.countries ) return true 
+        return false
+    }
 
-
-
-    async function handleSubmit(e){
+     function handleSubmit(e){
         e.preventDefault();
         try {
             dispatch(createActivity(input))
-            alert('Activity created successfully')
             setInput({
                 name: "",
                 difficulty: 0,
@@ -93,6 +91,7 @@ export default function Form(){
                 season: "",
                 countries: []
             })
+            alert('Activity created successfully')
             history.push('/countries')
         } catch (error) {
             alert('Oops! Something went wrong. Please try again')
@@ -100,7 +99,7 @@ export default function Form(){
     }
 
     return (
-      <>
+      < >
         <NavBar />
         <div className={f.formBackground}>
             <div>
@@ -211,7 +210,7 @@ export default function Form(){
             </div>
             <div>
                 <select onChange={(e) => handleSelect(e)}>
-                {countries.map((c) => (
+                {allCountries.map((c) => (
                     <option key={c.id} name={c.name} value={c.name}>
                     {" "}
                     {c.name}{" "}
@@ -220,7 +219,7 @@ export default function Form(){
                 </select>
             </div>
             <div>
-                <button className={f.submitBtn}> Create activity </button>
+                <button className={f.submitBtn} disabled={handleDisabled()} > Create activity </button>
             </div>
             </form>
             {input.countries?.map((el) => (

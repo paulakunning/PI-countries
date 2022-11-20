@@ -10,10 +10,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(3),
         allowNull: false,
         primaryKey: true,
+       
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          is: /^[a-z]+$/i,
+        }
       },
       flag: {
         type: DataTypes.STRING,

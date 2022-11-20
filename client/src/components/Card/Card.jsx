@@ -6,7 +6,7 @@ export default function Card({country}){
         <div className={c.card}>
             <h2>{country.name}</h2>
             <img src={country.flag} alt={country.name} />
-            <p>{country.continent}</p>
+            <p> Continent: {country.continent} </p>
         </div>
     )
 }

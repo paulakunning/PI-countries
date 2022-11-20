@@ -10,12 +10,20 @@
     width: 10rem;
     border-radius: 1.2rem;
 }
+.submitBtn:disabled{
+    background-color: gray;
+    border: gray;
+    cursor: default;
+}
 .formBackground {
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%
 }
 .formContainer {
     max-width: 600px;
     display: flex;
+    align-self: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
