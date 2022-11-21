@@ -11,19 +11,21 @@ import population from './detailIcons/population.png'
 
 export default function Detail(props){
     const dispatch = useDispatch()
-    const id =':'+(props.match.params.id)
+    const id = props.match.params.id
     const country = useSelector((state) => state.detail)
     const error = useSelector((state)=> state.error)
 
     useEffect(()=> {
         dispatch(getDetail(id))
-        console.log(error)
+        console.log(country)
         return () => {dispatch(clearDetail())}
     }, [dispatch])
 
-    if(error !== null) return( <p>{error}</p>)
-
-   if (country) {
+  if(country.type === undefined ) return (<div className={cd.detailContainer}>
+    <h2>{country}</h2>
+    </div>
+  )
+   if (Object.keys(country)) 
     return (
       <div className={cd.detailContainer}>
         <div className={cd.btnContainer}>
@@ -66,5 +68,6 @@ export default function Detail(props){
           <p>There is no activities for this country</p>
         )}
       </div>
-    ) }
+    ) 
+
 }

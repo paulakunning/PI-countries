@@ -29,15 +29,8 @@ activitiesRouter.post('/', checkData, async (req, res) => {
             newActivity.addCountry(countryActivity)
             res.status(200).send('Activity created successfully')
         } catch (error) {
-            res.status(400).send(error.message)
+            res.status(400).send('Oops,something went wrong. Please try again')
         }
 })
 
 module.exports = activitiesRouter
-
-/* ID
-Nombre
-Dificultad (Entre 1 y 5)
-Duración
-Temporada (Verano, Otoño, Invierno o Primavera)
- */

@@ -6,10 +6,14 @@ import NavBar from "../NavBar/NavBar"
 import f from "../Form/Form.module.css"
 
 function validate(input){
-    let errors ={}
+    var errors ={}
     if (!input.name) {errors.name = 'Name is required'}
     if(!/^[a-zA-Z ]*$/.test(input.name)) {errors.name = 'Name is invalid'}
+    if(!input.difficulty){errors.difficulty = 'Difficulty is required'}
+    if(!input.duration){errors.duration = 'Duration is required'}
     if(input.duration < 1 || input.duration > 24) {errors.duration = 'Duration should be a numer betweeen 1 and 24'}
+    if(!input.season) {errors.season = 'Season is required'}
+    if(!input.countries.length) {errors.countries = 'Please select at least one country'}
     return errors
 }
 
@@ -29,7 +33,7 @@ export default function Form(){
         dispatch(getCountries())
         dispatch(sortCountries())
         return ()=> {dispatch(clearFilters())}
-    })
+    }, [dispatch])
 
     function handleChange(e){
         setInput({
@@ -40,6 +44,27 @@ export default function Form(){
             ...input,
             [e.target.name]: e.target.value
         }))
+        console.log(input)
+    }
+
+    function handleCheckDif(e){
+        if(e.target.checked){
+            setInput({
+                ...input,
+                difficulty: e.target.value
+            })
+            errors.difficulty = ''
+        }
+    }
+    
+    function handleCheckSeason(e){
+        if(e.target.checked){
+            setInput({
+                ...input,
+                season: e.target.value
+            })
+            errors.season = ''
+        }
     }
 
     function handleSelect(e){   
@@ -51,23 +76,6 @@ export default function Form(){
             countries: [...input.countries, e.target.value]
         })
     }
-    
-    function handleCheckDif(e){
-        if(e.target.checked){
-            setInput({
-                ...input,
-                difficulty: e.target.value
-            })
-        }
-    }
-    function handleCheckSeason(e){
-        if(e.target.checked){
-            setInput({
-                ...input,
-                season: e.target.value
-            })
-        }
-    }
 
     function handleDelete(el){
         setInput({
@@ -75,8 +83,9 @@ export default function Form(){
             countries: input.countries.filter(c => c !== el)
         })
     }
+    
     const handleDisabled = () => {
-        if (!input.name || !input.difficulty || !input.duration || !input.season || !input.countries ) return true 
+        if (!input.name || !input.difficulty || !input.duration || !input.season || input.countries.length === 0 || !/^[a-zA-Z ]*$/.test(input.name) ) return true 
         return false
     }
 
@@ -117,6 +126,7 @@ export default function Form(){
                 name="name"
                 onChange={(e) => handleChange(e)}
                 />
+                {errors.name && <p className={f.errors}>{errors.name}</p>}
             </div>
             <div>
                 <label> Difficulty: </label>
@@ -160,6 +170,7 @@ export default function Form(){
                 onChange={(e) => handleCheckDif(e)}
                 />
                 <label htmlFor="diff5"> Expert </label>
+                {errors.difficulty && <p className={f.errors}>{errors.difficulty}</p>}
             </div>
             <div>
                 <label> Duration: </label>
@@ -172,6 +183,7 @@ export default function Form(){
                 onChange={(e) => handleChange(e)}
                 />{" "}
                 horas
+                {errors.duration && <p className={f.errors}>{errors.duration}</p>}
             </div>
             <div>
                 <label> Season: </label>
@@ -207,13 +219,13 @@ export default function Form(){
                 onChange={(e) => handleCheckSeason(e)}
                 />
                 <label htmlFor="seasonChoice4"> Winter </label>
+                {errors.season && <p className={f.errors}>{errors.season}</p>}
             </div>
             <div>
                 <select onChange={(e) => handleSelect(e)}>
                 {allCountries.map((c) => (
                     <option key={c.id} name={c.name} value={c.name}>
-                    {" "}
-                    {c.name}{" "}
+                    {c.name} 
                     </option>
                 ))}
                 </select>
@@ -223,8 +235,8 @@ export default function Form(){
             </div>
             </form>
             {input.countries?.map((el) => (
-            <div>
-                <img src={el} alt="" />
+            <div key={el}>
+                <img src={el} alt=""  />
                 <p>{el}</p>
                 <button onClick={() => handleDelete(el)}> x </button>
             </div>
