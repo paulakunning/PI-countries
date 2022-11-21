@@ -22,7 +22,7 @@ export function getCountries(){
         } catch (error) {
             dispatch({
                 type: ERROR,
-                payload: error.message
+                payload: error
             })
         }
     }
@@ -39,7 +39,7 @@ export function getActivities(){
         } catch (error) {
             dispatch({
                 type: ERROR, 
-                payload: error.message
+                payload: error
             })
         }
     }
@@ -56,7 +56,7 @@ export function getCountriesByName(name){
         } catch (error) {
             dispatch({
                 type: ERROR,
-                payload: error.message
+                payload: error
             })
         }
     }
@@ -65,7 +65,7 @@ export function getCountriesByName(name){
 export function getDetail(id){
     return async function(dispatch){
         try {
-            var json = await axios.get('http://localhost:3001/countries/'+ id)
+            var json = await axios.get('http://localhost:3001/countries/:'+ id)
             return dispatch({
                 type: GET_DETAIL,
                 payload: json.data
@@ -73,7 +73,7 @@ export function getDetail(id){
         } catch (error) {
             dispatch({
                 type:ERROR,
-                payload: error.message
+                payload: error
             })
         }
     }

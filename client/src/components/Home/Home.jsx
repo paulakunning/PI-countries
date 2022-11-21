@@ -35,10 +35,9 @@ export default function Home(){
 
     if(error){
         return (
-            <>
-                <h1>Ocurrió un error al cargar los países</h1>
-                <p>{error}</p>
-            </>
+            <div>
+                <h1>{error.message}</h1>
+            </div>
         )
     } else if (countries.length){
         return (
@@ -52,9 +51,9 @@ export default function Home(){
                 <div className={h.cardsContainer} >
                     {currentCountries.map(country => {
                         return (
-                            <div>
+                            <div key={country.id}>
                                 <Link to={'/countries/'+ country.id} >
-                                <Card country={country} key={country.id} />
+                                <Card country={country} />
                                 </Link>
                             </div>
                         )

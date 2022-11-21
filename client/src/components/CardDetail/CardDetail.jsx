@@ -17,15 +17,29 @@ export default function Detail(props){
 
     useEffect(()=> {
         dispatch(getDetail(id))
-        console.log(country)
+      console.log(country)
         return () => {dispatch(clearDetail())}
     }, [dispatch])
 
-  if(country.type === undefined ) return (<div className={cd.detailContainer}>
-    <h2>{country}</h2>
+  if (typeof country === 'string') return (
+    <div>
+      <Link to="/countries">
+        <div className={cd.modalContainer}>
+          <div className={cd.modalContent}>
+            <div className={cd.modalText}>
+              <h3>{country}</h3>
+            </div>
+            <div className={cd.modalBtn}>
+              <Link to="/countries">
+                <button className={cd.backBtn}> Back to home </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Link>
     </div>
-  )
-   if (Object.keys(country)) 
+  );
+   else if (country) 
     return (
       <div className={cd.detailContainer}>
         <div className={cd.btnContainer}>
@@ -41,15 +55,15 @@ export default function Detail(props){
         </div>
         <div className={cd.detailIcons}>
           <img src={continent} alt="continentIcon" />
-          <p>Continent: {country.continent}</p>
+          <p> Continent: {country.continent}</p>
         </div>
         <div className={cd.detailIcons}>
           <img src={capital} alt="capitalIcon" />
-          <p>Capital: {country.capital}</p>
+          <p> Capital: {country.capital}</p>
         </div>
         <div className={cd.detailIcons}>
           <img src={subregion} alt="subregionIcon" />
-          <p>Subregion : {country.subregion}</p>
+          <p> Subregion : {country.subregion}</p>
         </div>
         <div className={cd.detailIcons}>
           <img src={area} alt="areaIcon" />
@@ -57,16 +71,15 @@ export default function Detail(props){
         </div>
         <div className={cd.detailIcons}>
           <img src={population} alt="populationIcon" />
-          <p>
-            {" "}
-            Population: {new Intl.NumberFormat().format(country.population)}
+          <p> Population: {new Intl.NumberFormat().format(country.population)}
           </p>
         </div>
-        {country.activities !== undefined ? (
-          country.activities.map((el) => <p> {el["name"]}</p>)
-        ) : (
-          <p>There is no activities for this country</p>
-        )}
+        <div> 
+          <p> Activities : </p>
+          {country.hasOwnProperty("activities") && country.activities.length ? 
+          country.activities.map((act) => (<p>{act.name}</p>)) :
+           (<p>There is no activities for this country</p>)}
+        </div>
       </div>
     ) 
 

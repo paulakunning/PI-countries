@@ -17,7 +17,6 @@ function rootReducer(state = initialState, action){
                 ...state,
                 countries: action.payload,
                 allCountries: action.payload,
-                formCountries: action.payload
             }
         case GET_ACTIVITIES:
             return {
@@ -93,14 +92,7 @@ function rootReducer(state = initialState, action){
                 ...state,
                 detail: []
             }
-        }
-      /*   case RESET_FORM: {
-            return {
-                ...state, 
-                filtered: []
-            }
-        } */
-    
+        }   
         default:
             return {...state}
     }
