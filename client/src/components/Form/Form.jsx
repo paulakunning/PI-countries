@@ -44,7 +44,6 @@ export default function Form(){
             ...input,
             [e.target.name]: e.target.value
         }))
-        console.log(input)
     }
 
     function handleCheckDif(e){
@@ -53,6 +52,10 @@ export default function Form(){
                 ...input,
                 difficulty: e.target.value
             })
+            setErrors(validate({
+                ...input,
+                difficulty: e.target.value
+            }))
             errors.difficulty = ''
         }
     }
@@ -63,6 +66,10 @@ export default function Form(){
                 ...input,
                 season: e.target.value
             })
+            setErrors(validate({
+                ...input,
+                season: e.target.value
+            }))
             errors.season = ''
         }
     }
@@ -70,11 +77,15 @@ export default function Form(){
     function handleSelect(e){   
         const country = e.target.value
         const filterCountry = input.countries.find(c => c === country)
-        if(filterCountry) return alert('No puedes agregar dos veces el mismo pais')
+        if(filterCountry) return alert('You have already added that country.')
         setInput({
             ...input,
             countries: [...input.countries, e.target.value]
         })
+        setErrors(validate({
+            ...input,
+            countries:  [...input.countries, e.target.value]
+        }))
     }
 
     function handleDelete(el){
@@ -83,7 +94,7 @@ export default function Form(){
             countries: input.countries.filter(c => c !== el)
         })
     }
-    
+
     const handleDisabled = () => {
         if (!input.name || !input.difficulty || !input.duration || !input.season || input.countries.length === 0 || !/^[a-zA-Z ]*$/.test(input.name) ) return true 
         return false
@@ -118,8 +129,8 @@ export default function Form(){
             </div>
             <form className={f.formContainer} onSubmit={(e) => handleSubmit(e)}>
             <h1> New activity</h1>
-            <div>
-                <label> Name: </label>
+            <div className={f.inputContainer} >
+                <label className={f.label}> Name: </label>
                 <input
                 type="text"
                 value={input.name}
@@ -128,8 +139,8 @@ export default function Form(){
                 />
                 {errors.name && <p className={f.errors}>{errors.name}</p>}
             </div>
-            <div>
-                <label> Difficulty: </label>
+            <div className={f.inputContainer}>
+                <label className={f.label}> Difficulty: </label>
                 <input
                 type="radio"
                 id="diff1"
@@ -172,8 +183,8 @@ export default function Form(){
                 <label htmlFor="diff5"> Expert </label>
                 {errors.difficulty && <p className={f.errors}>{errors.difficulty}</p>}
             </div>
-            <div>
-                <label> Duration: </label>
+            <div className={f.inputContainer}>
+                <label className={f.label}> Duration: </label>
                 <input
                 type="number"
                 min="1"
@@ -185,8 +196,8 @@ export default function Form(){
                 horas
                 {errors.duration && <p className={f.errors}>{errors.duration}</p>}
             </div>
-            <div>
-                <label> Season: </label>
+            <div className={f.inputContainer}>
+                <label className={f.label}> Season: </label>
                 <input
                 type="radio"
                 id="seasonChoice1"
@@ -221,26 +232,27 @@ export default function Form(){
                 <label htmlFor="seasonChoice4"> Winter </label>
                 {errors.season && <p className={f.errors}>{errors.season}</p>}
             </div>
-            <div>
-                <select onChange={(e) => handleSelect(e)}>
+            <div className={f.inputContainer}>
+            <label className={f.label}> Countries: </label>
+                <select onChange={(e) => handleSelect(e)} >
                 {allCountries.map((c) => (
                     <option key={c.id} name={c.name} value={c.name}>
                     {c.name} 
                     </option>
                 ))}
                 </select>
+                {errors.countries && <p className={f.errors}>{errors.countries}</p>}
             </div>
-            <div>
+            {input.countries?.map((el) => (
+            <div className={f.countriesNames} key={el}>
+                <p>{el}</p>
+                <button className={f.closeBtn} onClick={() => handleDelete(el)}> x </button>
+            </div>
+            ))}
+            <div className={f.inputContainer}>
                 <button className={f.submitBtn} disabled={handleDisabled()} > Create activity </button>
             </div>
             </form>
-            {input.countries?.map((el) => (
-            <div key={el}>
-                <img src={el} alt=""  />
-                <p>{el}</p>
-                <button onClick={() => handleDelete(el)}> x </button>
-            </div>
-            ))}
         </div>
       </>
     );

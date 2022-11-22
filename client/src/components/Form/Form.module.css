@@ -16,9 +16,13 @@
     cursor: default;
 }
 .formBackground {
+    background: url('./formBg.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
     display: flex;
     flex-direction: column;
-    height: 100%
+    height: 100vh;
 }
 .formContainer {
     max-width: 600px;
@@ -26,7 +30,6 @@
     align-self: center;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 1rem;
     font-family: 'Montserrat', sans-serif;
     background-color:rgba(255, 255, 255, 0.671);
@@ -35,10 +38,13 @@
 }
 .formContainer > h1 {
     color: #142d4c;
+    padding: 1rem;
+    text-align: center;
 }
 .backBtn {
     align-self: flex-start;
     font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     font-size: 1rem;
     background-color: white;
     color: #9fd3c7;
@@ -58,4 +64,49 @@
 }
 .errors {
     color: red;
+}
+.inputContainer{
+    padding: 1rem;
+}
+.inputContainer > select {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+.label {
+   font-weight: bold;
+}
+.countriesNames {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Montserrat', sans-serif;
+    align-self: center;
+    align-items: center;
+    justify-content: space-between;
+   color: #9fd3c7;
+   background-color: #385170;
+   margin: 0.3rem;
+   border-radius: 25px;
+}
+
+.countriesNames > p {
+    padding: 1rem;
+}
+
+.closeBtn {
+    margin: 0.8rem;
+    background-color: white;
+    cursor: pointer;
+    top: 50% - 4em;
+    right: 50% - 2em;
+    box-sizing: border-box;
+    width: 2em;
+    height: 2em;
+    border-radius: 2em;
+    border: 1px solid #c2c7cc;
+    color:#c2c7cc;
+    transition: all ease 0.3s;
+}
+.closeBtn:hover {
+    color: red;
+    border-color: red;
 }

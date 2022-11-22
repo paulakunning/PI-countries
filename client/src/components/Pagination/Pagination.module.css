@@ -3,16 +3,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    
 }
 .pageBtn, .prevBtn, .backBtn {
     transition: background-color .3s;
     padding: 0.8rem;
     background-color: transparent;
     color: #9fd3c7;
+    background-color: white;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.2rem;
-    border: 1px solid white;
+    border: 1px solid #9fd3c7;
     outline: none;
 }
 .pageBtn:focus, .pageBtn:active {
@@ -25,6 +25,6 @@
     color: white;
     cursor: pointer;
 }
-.prevBtn:disabled, .backBtn:disabled{
-    color: white;
+.prevBtn:disabled, .backBtn:disabled {
+    display: none;
 }

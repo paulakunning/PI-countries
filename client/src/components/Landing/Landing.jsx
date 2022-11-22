@@ -7,9 +7,10 @@ export default function Landing(){
       <div className={l.landing}>
         <div className={l.landingContainer} >
         <h1>Welcome to Countries App</h1>
-        <button className={l.startBtn} >
-          <Link to="/countries"> Start </Link>
-        </button>
+          <Link to="/countries">
+            <button className={l.startBtn} > Start 
+            </button>
+          </Link>
         <h2>Are you ready?</h2>
         </div>
       </div>

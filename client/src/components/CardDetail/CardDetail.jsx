@@ -17,7 +17,6 @@ export default function Detail(props){
 
     useEffect(()=> {
         dispatch(getDetail(id))
-      console.log(country)
         return () => {dispatch(clearDetail())}
     }, [dispatch])
 
@@ -30,9 +29,7 @@ export default function Detail(props){
               <h3>{country}</h3>
             </div>
             <div className={cd.modalBtn}>
-              <Link to="/countries">
                 <button className={cd.backBtn}> Back to home </button>
-              </Link>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@
     font-size: 1rem;
     padding: 0.5rem;
     border: 1px solid white;
-    width: 10rem;
+    width: 15rem;
     border-radius: 1.2rem;
     text-align: center;
 }
@@ -19,4 +19,11 @@
 }
 .sbBtn > img {
     max-width: 30px;
+}
+.errors {
+    padding-left: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: rgb(190, 18, 18);
+    align-self: center;
 }

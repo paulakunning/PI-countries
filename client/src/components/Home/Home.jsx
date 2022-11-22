@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearDetail, getCountries } from "../../redux/actions/actions";
+import { getCountries, clearFilters } from "../../redux/actions/actions";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import NavBar from "../NavBar/NavBar"
-import SearchBar from "../SearchBar/SearchBar";
 import Filters from "../Filters/Filters";
 import h from "./Home.module.css"
-import loader from "../Home/loader.gif"
 
 export default function Home(){
     const dispatch = useDispatch()
@@ -32,50 +30,60 @@ export default function Home(){
     const pagination = (pagenumber) => {
         setCurrentPage(pagenumber)
     }
+    
+    const refreshPage = ()=>{
+        window.location.reload();
+     }
 
     if(error){
         return (
-            <div>
-                <h1>{error.message}</h1>
+          <div className={h.homeContainer}>
+            <NavBar />
+            <div className={h.errorContainer}>
+              <div className={h.errorContent}>
+                <h3>{error}</h3>
+                <button className={h.errorBtn} onClick={refreshPage}>
+                  Reload page 
+                </button>
+              </div>
             </div>
-        )
+          </div>
+        );
     } else if (countries.length){
         return (
-            <div className={h.homeContainer}>
-                <NavBar/>
-                <Filters 
-                setCurrentPage={setCurrentPage}
-                setOrder={setOrder}
-                currentPage={currentPage}
-                />
-                <div className={h.cardsContainer} >
-                    {currentCountries.map(country => {
-                        return (
-                            <div key={country.id}>
-                                <Link to={'/countries/'+ country.id} >
-                                <Card country={country} />
-                                </Link>
-                            </div>
-                        )
-                    })}
-                </div>
-                <div>
-                    <Pagination 
-                    countriesPerPage={countriesPerPage}
-                    currentPage={currentPage}
-                    countries={countries.length}
-                    pagination={pagination} />
-                </div>
+          <div className={h.homeContainer}>
+            <NavBar />
+            <Filters
+              setCurrentPage={setCurrentPage}
+              setOrder={setOrder}
+              currentPage={currentPage}
+            />
+            <div className={h.cardsContainer}>
+              {currentCountries.map((country) => {
+                return (
+                  <div key={country.id}>
+                    <Link to={"/countries/" + country.id}>
+                      <Card country={country} />
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
-        )
+            <div>
+              <Pagination
+                countriesPerPage={countriesPerPage}
+                currentPage={currentPage}
+                countries={countries.length}
+                pagination={pagination}
+              />
+            </div>
+          </div>
+        );
     } else {
         return (
             <div className={h.loader}>
-                {/* <img src={loader} alt="" /> */}
                 <h1>Loading...</h1>
             </div>
         )
     }
-
-
 }

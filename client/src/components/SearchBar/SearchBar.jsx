@@ -25,7 +25,7 @@ export default function SearchBar(){
 
     function handleSubmit(e){
         e.preventDefault()
-        dispatch(getCountriesByName(name))
+        if(!errors.length)dispatch(getCountriesByName(name))
         setName("")
     }
 
@@ -40,8 +40,9 @@ export default function SearchBar(){
           />
           <button className={sb.sbBtn} type="submit">
             <img src={icon} alt="Search icon" />
-          </button>
+          </button> {errors.name && <p className={sb.errors}>{errors.name}</p>}
         </form>
+         
       </div>
     );
 }

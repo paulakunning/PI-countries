@@ -22,7 +22,7 @@ export function getCountries(){
         } catch (error) {
             dispatch({
                 type: ERROR,
-                payload: error
+                payload: 'Oops! Something went wrong.'
             })
         }
     }
@@ -56,7 +56,7 @@ export function getCountriesByName(name){
         } catch (error) {
             dispatch({
                 type: ERROR,
-                payload: error
+                payload: 'Oops! There is no country with that name. Please try something else'
             })
         }
     }

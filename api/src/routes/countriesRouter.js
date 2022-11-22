@@ -4,7 +4,6 @@ const { Op } = require('sequelize');
 const { getApiInfo } = require('../controllers/countriesController');
 const { Country, Activity } = require('../db.js')
 
-
 countriesRouter.get('/', async (req, res) => {
     const { name } = req.query
     try {
@@ -24,12 +23,17 @@ countriesRouter.get('/', async (req, res) => {
             }
           }
         })
-        res.status(200).send(countryByName)  
+        countryByName.length ? res.status(200).send(countryByName) : res.status(400).send('Oops, no hay pais con ese nombre')
         } else {
-          res.status(200).send(allCountries) 
+          // Get countries sorted by name by default
+          const allCountriesSorted = allCountries.sort(function(a,b){
+            if(a.name > b.name) return 1
+            if(b.name > a.name) return -1
+            return 0 })
+          res.status(200).send(allCountriesSorted) 
         }
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).send('Oops! Something went wrong. Please try again')
     }    
 })
 
@@ -43,7 +47,7 @@ countriesRouter.get('/:id', async (req, res) => {
       let countryById = await Country.findByPk(countryId, {
         include: {
           model: Activity,
-          attributes: ['name'],
+          attributes: ['name', 'difficulty', 'duration', 'season'],
              through: {
                attributes:[]
            }

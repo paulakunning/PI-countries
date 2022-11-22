@@ -11,10 +11,14 @@ export default function NavBar(){
         </div>
         <div className={n.linksContainer}>
             <div className={n.links}>
-                <NavLink to="/countries"> Home </NavLink> 
+                <NavLink to="/countries" style={isActive => ({
+                  color: isActive ? " #142d4c" : "white"
+                  })} > Home </NavLink> 
             </div>
            <div className={n.links} >
-            <NavLink to="/form"> Create activity </NavLink>
+            <NavLink  to="/form" style={isActive => ({
+              color: isActive ? "#142d4c" : "white",
+              })}> Create activity </NavLink>
            </div>
         </div>
       </div>
