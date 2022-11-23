@@ -13,12 +13,11 @@ export default function Detail(props){
     const dispatch = useDispatch()
     const id = props.match.params.id
     const country = useSelector((state) => state.detail)
-    const error = useSelector((state)=> state.error)
 
     useEffect(()=> {
         dispatch(getDetail(id))
         return () => {dispatch(clearDetail())}
-    }, [dispatch])
+    }, [dispatch, id])
 
   if (typeof country === 'string') return (
     <div>
@@ -38,46 +37,51 @@ export default function Detail(props){
   );
    else if (country) 
     return (
-      <div className={cd.detailContainer}>
+      <div className={cd.detail}>
         <div className={cd.btnContainer}>
           <Link to="/countries">
             <button className={cd.backBtn}> Back to home </button>
           </Link>
         </div>
-        <div>
-          <img src={country.flag} alt='country flag' />
-          <h1>
-            {country.name} ({country.id})
-          </h1>
+
+        <div className={cd.info}>
+
+        <div className={cd.detailContainer}>
+          <div className={cd.title}>
+            <img src={country.flag} alt='country flag' />
+            <h1>
+              {country.name} ({country.id})
+            </h1>
+          </div>
+          <div className={cd.detailIcons}>
+            <img src={continent} alt="continentIcon" />
+            <p> Continent: {country.continent}</p>
+          </div>
+          <div className={cd.detailIcons}>
+            <img src={capital} alt="capitalIcon" />
+            <p> Capital: {country.capital}</p>
+          </div>
+          <div className={cd.detailIcons}>
+            <img src={subregion} alt="subregionIcon" />
+            <p> Subregion : {country.subregion}</p>
+          </div>
+          <div className={cd.detailIcons}>
+            <img src={area} alt="areaIcon" />
+            <p> Area: {new Intl.NumberFormat().format(country.area)} km² </p>
+          </div>
+          <div className={cd.detailIcons}>
+            <img src={population} alt="populationIcon" />
+            <p> Population: {new Intl.NumberFormat().format(country.population)}
+            </p>
+          </div>
         </div>
-        <div className={cd.detailIcons}>
-          <img src={continent} alt="continentIcon" />
-          <p> Continent: {country.continent}</p>
-        </div>
-        <div className={cd.detailIcons}>
-          <img src={capital} alt="capitalIcon" />
-          <p> Capital: {country.capital}</p>
-        </div>
-        <div className={cd.detailIcons}>
-          <img src={subregion} alt="subregionIcon" />
-          <p> Subregion : {country.subregion}</p>
-        </div>
-        <div className={cd.detailIcons}>
-          <img src={area} alt="areaIcon" />
-          <p> Area: {new Intl.NumberFormat().format(country.area)} km² </p>
-        </div>
-        <div className={cd.detailIcons}>
-          <img src={population} alt="populationIcon" />
-          <p> Population: {new Intl.NumberFormat().format(country.population)}
-          </p>
-        </div>
-        <div> 
-          <p> Activities : </p>
-          {country.hasOwnProperty("activities") && country.activities.length ? 
-          country.activities.map((act) => (<p>{act.name}</p>)) :
-           (<p>There is no activities for this country</p>)}
+        <div className={cd.actContainer} > 
+            <p> Activities : </p>
+            {country.hasOwnProperty("activities") && country.activities.length ? 
+            country.activities.map((act) => (<p>{act.name}</p>)) :
+            (<p>There is no activities for this country</p>)}
+          </div>
         </div>
       </div>
     ) 
-
 }

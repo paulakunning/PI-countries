@@ -87,11 +87,9 @@
    margin: 0.3rem;
    border-radius: 25px;
 }
-
 .countriesNames > p {
     padding: 1rem;
 }
-
 .closeBtn {
     margin: 0.8rem;
     background-color: white;

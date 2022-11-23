@@ -1,11 +1,32 @@
+.detail {
+    background: url('./detailBg.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100vh;
+ 
+}
 .detailContainer {
+    background-color: rgba(255, 255, 255, 0.568);
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
-    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 25px;
+}
+.title {
+    text-align: center;
+    align-self: center;
+}
+.title > img {  
+    align-items: center;
+    padding: 1rem;
 }
 .detailIcons {
     display: flex;
@@ -16,8 +37,12 @@
     width: 50px;
     height: 50px;
 }
+.detailIcons > p {
+    padding-left: 1rem;
+}
 .btnContainer {
     align-self: flex-start;
+    padding-right: 20rem;
 }
 .backBtn {
     align-self: flex-start;
@@ -73,4 +98,17 @@
 .modalBtn {
     padding: 0.5rem;
     align-self: center;
+}
+.actContainer {
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    margin: 2rem;
+    background-color: rgba(255, 255, 255, 0.568);
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 25px;
+}
+.info {
+    display: flex;
+    align-items: center;
 }
