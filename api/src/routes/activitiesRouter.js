@@ -33,4 +33,37 @@ activitiesRouter.post('/', checkData, async (req, res) => {
         }
 })
 
+activitiesRouter.put('/:idAct', async (req, res) => {
+    const {idAct} = req.params;
+    const id = idAct.slice(1)
+    try {
+        const activity = await Activity.findByPk(id)
+        if(!activity) return res.send('The id is invalid')
+        
+        const {name, difficulty, duration, season } = req.body;
+        if(name) activity.name = name;
+        if(difficulty) activity.difficulty = difficulty;
+        if(duration) activity.duration = duration;
+        if(season) activity.season = season;
+
+        await activity.save()
+        res.send(activity)
+
+    } catch (error) {
+        res.status(400).send(`Sorry, we can't edit the activity. Please try again`)
+    }
+})
+
+activitiesRouter.delete('/:idAct', async(req, res) => {
+    const { idAct } = req.params;
+    const id = idAct.slice(1)
+    try {
+        const activity = await Activity.destroy({where: {id: id }})
+        res.send('Activity deleted successfully')
+
+    } catch (error) {
+        res.status(400).send('Sorry, something went wrong. Please try again')
+    }
+})
+
 module.exports = activitiesRouter

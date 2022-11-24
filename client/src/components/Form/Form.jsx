@@ -193,7 +193,7 @@ export default function Form(){
                 value={input.duration}
                 onChange={(e) => handleChange(e)}
                 />{" "}
-                horas
+                hours.
                 {errors.duration && <p className={f.errors}>{errors.duration}</p>}
             </div>
             <div className={f.inputContainer}>
