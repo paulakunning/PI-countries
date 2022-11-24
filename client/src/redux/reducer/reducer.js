@@ -36,7 +36,8 @@ function rootReducer(state = initialState, action){
         case GET_COUNTRIES_BY_NAME: {
             return {
                 ...state,
-                countries: action.payload
+                countries: action.payload,
+                filtered: action.payload
             }
         }
         case CREATE_ACTIVITY: {
@@ -77,7 +78,8 @@ function rootReducer(state = initialState, action){
             if(action.payload === 'popDesc') sorted.sort(function(a,b){return b.population - a.population})
             return {
                 ...state,
-                countries: sorted
+                countries: sorted, 
+                filtered: sorted
             }
         }
         case RESET_FILTERS: {

@@ -120,7 +120,7 @@ export default function Form(){
     }
 
     return (
-      < >
+      <>
         <NavBar />
         <div className={f.formBackground}>
             <div>
@@ -193,7 +193,7 @@ export default function Form(){
                 name="duration"
                 value={input.duration}
                 onChange={(e) => handleChange(e)}
-                />{" "}
+                />
                 hours.
                 {errors.duration && <p className={f.errors}>{errors.duration}</p>}
             </div>
