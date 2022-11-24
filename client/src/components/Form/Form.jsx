@@ -29,6 +29,7 @@ export default function Form(){
         season: "",
         countries: []
     })
+
     useEffect(()=> {
         dispatch(getCountries())
         dispatch(sortCountries())
@@ -96,7 +97,7 @@ export default function Form(){
     }
 
     const handleDisabled = () => {
-        if (!input.name || !input.difficulty || !input.duration || !input.season || input.countries.length === 0 || !/^[a-zA-Z ]*$/.test(input.name) ) return true 
+        if (!input.name || !input.difficulty || !input.duration || !input.season || input.duration < 1 || input.duration > 24 || input.countries.length === 0 || !/^[a-zA-Z ]*$/.test(input.name) ) return true 
         return false
     }
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterByContinent, getActivities, filterByActivity, clearFilters, getCountries, sortCountries } from "../../redux/actions/actions";
 import fi from '../Filters/Filters.module.css'
 
-export default function Filters({setCurrentPage, currentPage, setOrder}){
+export default function Filters({setCurrentPage, setOrder}){
     const dispatch = useDispatch()
     const allActivities = useSelector((state)=> state.activities)
     const continentOptions = ['All', 'Africa', 'Antarctica', 'Asia', 'Europe', 'South America', 'North America', 'Oceania']
