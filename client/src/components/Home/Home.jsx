@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCountries, clearFilters } from "../../redux/actions/actions";
+import { getCountries } from "../../redux/actions/actions";
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import NavBar from "../NavBar/NavBar"
