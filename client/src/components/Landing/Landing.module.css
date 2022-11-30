@@ -17,6 +17,7 @@
     padding: 3rem;
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
 }
 .landingContainer {
     display: flex;
@@ -29,6 +30,7 @@
     background-color:rgba(255, 255, 255, 0.671);
     border-radius: 25px;
     box-shadow: 0px 10px 20px -3px #5b85b8;
+    margin: 1.5rem;
 }
 .startBtn {
     background-color: white;
@@ -52,4 +54,10 @@
 a {
     text-decoration: none;
     color: #385170;
+}
+
+@media screen and (max-width: 992px) {
+    .landingContainer > h1,.landingContainer > h2 {
+        font-size: 2rem;
+    }
 }
