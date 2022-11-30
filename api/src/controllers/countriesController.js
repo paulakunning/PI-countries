@@ -5,7 +5,7 @@ const url = 'https://restcountries.com/v3/all'
 const getApiInfo = async () => {
     const request = await axios.get(url)
     const countries = request.data.forEach(c => {
-        Country.findOrCreate({
+        Country.bulkCreate({
             where: {
                 id: c.cca3,
                 name:c.name.common,
