@@ -52,7 +52,7 @@ export default function Home(){
     } else if (countries.length){
         return (
           <div className={h.homeContainer}>
-            <NavBar />
+            <NavBar setCurrentPage={setCurrentPage} />
             <Filters
               setCurrentPage={setCurrentPage}
               setOrder={setOrder}

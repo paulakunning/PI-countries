@@ -11,7 +11,7 @@ function validate(name){
     return errors
 }
 
-export default function SearchBar(){
+export default function SearchBar({setCurrentPage}){
 
     const dispatch = useDispatch()
     const [ name, setName ] = useState([""])
@@ -27,6 +27,7 @@ export default function SearchBar(){
         e.preventDefault()
         if(!errors.length)dispatch(getCountriesByName(name))
         setName("")
+        setCurrentPage(1)
     }
 
     return (

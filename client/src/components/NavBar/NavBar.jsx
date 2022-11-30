@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 import n from '../NavBar/NavBar.module.css'
 import SearchBar from "../SearchBar/SearchBar";
 
-export default function NavBar(){
+export default function NavBar({setCurrentPage}){
     return (
       <div className={n.navContainer}>
         <div className={n.searchBarCont}>
-          <SearchBar />
+          <SearchBar setCurrentPage={setCurrentPage} />
         </div>
         <div className={n.linksContainer}>
             <div className={n.links}>
