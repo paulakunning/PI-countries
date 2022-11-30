@@ -26,8 +26,10 @@ export default function Detail(props){
         dispatch(getDetail(id))
         return () => {dispatch(clearDetail())}
     }, [dispatch, id])
+    
 
-  if (typeof country === 'string') return (
+  if (typeof country === 'string') 
+  {return (
     <div>
       <Link to="/countries">
         <div className={cd.modalContainer}>
@@ -42,16 +44,16 @@ export default function Detail(props){
         </div>
       </Link>
     </div>
-  );
+  )}
    else if (country) 
-    return (
-      <div className={cd.detail}>
+   { return (
+      <div className={cd.detail} >
         <div className={cd.btnContainer}>
           <Link to="/countries">
             <button className={cd.backBtn}> Back to home </button>
           </Link>
         </div>
-        <div className={cd.info}>
+        <div className={cd.info} >
           <div className={cd.detailContainer}>
             <div className={cd.title}>
               <img src={country.flag} alt="country flag" />
@@ -60,7 +62,7 @@ export default function Detail(props){
               </h1>
             </div>
             <div className={cd.detailIcons}>
-              <img src={continent} alt="continentIcon" />
+              <img src={continent} alt="continentIcon" /> 
               <p> Continent: {country.continent}</p>
             </div>
             <div className={cd.detailIcons}>
@@ -87,7 +89,7 @@ export default function Detail(props){
             {country.hasOwnProperty("activities") &&
             country.activities.length ? (
               country.activities.map((act) => (
-                <div className={cd.actContainer}>
+                <div key={act.id} className={cd.actContainer}>
                   <p>Name : {act.name}</p>
                   <p>Duration : {act.duration} hours. </p>
                   <p>Season : {act.season} </p>
@@ -100,5 +102,11 @@ export default function Detail(props){
           </div>
         </div>
       </div>
-    ); 
+    )}
+    else {
+      return (
+          <div className={cd.loader}>
+              <h1>Loading...</h1>
+          </div>
+      )}
 }

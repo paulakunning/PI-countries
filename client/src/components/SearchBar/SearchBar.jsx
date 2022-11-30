@@ -43,7 +43,6 @@ export default function SearchBar({setCurrentPage}){
             <img src={icon} alt="Search icon" />
           </button> {errors.name && <p className={sb.errors}>{errors.name}</p>}
         </form>
-         
       </div>
     );
 }

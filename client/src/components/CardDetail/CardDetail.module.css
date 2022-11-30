@@ -117,3 +117,16 @@
     display: flex;
     align-items: center;
 }
+.loader {
+    background-image: url('../Home/countriesLoader.gif');
+    background-repeat:no-repeat;
+    background-position:center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.loader > h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #385170;
+    padding-top: 10%;
+}
