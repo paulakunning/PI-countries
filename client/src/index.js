@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios';
 
 //axios.defaults.baseURL = 'http://localhost:3001/'; 
-axios.defaults.baseURL = 'https://pi-countries-production-1aeb.up.railway.app/';
+axios.defaults.baseURL = 'https://pi-countries-back.onrender.com/';
 
 ReactDOM.render(
     <Provider store={ store }>
