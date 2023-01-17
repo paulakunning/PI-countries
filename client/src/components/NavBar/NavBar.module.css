@@ -20,3 +20,9 @@
     font-weight: bold;
     padding: 1rem;
 }
+@media screen and (max-width: 576px) {
+    .navContainer {
+        flex-direction: column-reverse;
+        height: 3.5rem;
+    }
+ }
