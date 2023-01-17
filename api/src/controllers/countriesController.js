@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { Country, Activity } = require('../db.js')
-const url = 'https://restcountries.com/v3/all'
+const url = 'https://restcountries.com/v3.1/all'
 
 const getApiInfo = async () => {
     const request = await axios.get(url)
