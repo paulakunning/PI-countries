@@ -14,11 +14,11 @@ export default function Home(){
     let countries = useSelector(state => state.countries)
     const filtrado = useSelector(state => state.filtered)
     // Conservamos el estado filtrado cuando volvemos al home
-    filtrado.length ? countries = filtrado : countries
+    filtrado.length ? countries = filtrado : countries = countries // eslint-disable-line
     const error = useSelector(state => state.error)
-    const [ order, setOrder ] = useState('')
+    const [ order, setOrder ] = useState('') // eslint-disable-line
     const [ currentPage, setCurrentPage ] = useState(1)
-    const [ countriesPerPage, setCountriesPerPage ] = useState(10)
+    const [ countriesPerPage, setCountriesPerPage ] = useState(10) // eslint-disable-line
     const indexOfLastCountry = currentPage * countriesPerPage
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage
     const currentCountries = currentPage === 1 ? countries.slice(indexOfFirstCountry, 9) : countries.slice(indexOfFirstCountry, indexOfLastCountry)
