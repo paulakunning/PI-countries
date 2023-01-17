@@ -14,7 +14,7 @@ export const CREATE_ACTIVITY = 'CREATE_ACTIVITY'
 export function getCountries(){
     return async function(dispatch){
         try {
-            const json = await axios.get('http://localhost:3001/countries')
+            const json = await axios.get('/countries')
             return dispatch({
                 type: GET_COUNTRIES,
                 payload: json.data
@@ -31,7 +31,7 @@ export function getCountries(){
 export function getActivities(){
     return async function(dispatch){
         try {
-            const json = await axios.get('http://localhost:3001/activities')
+            const json = await axios.get('/activities')
             return dispatch({
                 type: GET_ACTIVITIES,
                 payload: json.data
@@ -48,7 +48,7 @@ export function getActivities(){
 export function getCountriesByName(name){
     return async function(dispatch){
         try {
-            var json = await axios.get('http://localhost:3001/countries/?name='+ name)
+            var json = await axios.get('/countries/?name='+ name)
             return dispatch({
                 type: GET_COUNTRIES_BY_NAME,
                 payload: json.data
@@ -65,7 +65,7 @@ export function getCountriesByName(name){
 export function getDetail(id){
     return async function(dispatch){
         try {
-            var json = await axios.get('http://localhost:3001/countries/:'+ id)
+            var json = await axios.get('/countries/:'+ id)
             return dispatch({
                 type: GET_DETAIL,
                 payload: json.data
@@ -82,7 +82,7 @@ export function getDetail(id){
 export function createActivity(payload){
     return async function (){
         try {
-            const response = await axios.post('http://localhost:3001/activities', payload)
+            const response = await axios.post('/activities', payload)
             return response
         } catch(error){
             return 'Ocurrió un error al crear la actividad'
