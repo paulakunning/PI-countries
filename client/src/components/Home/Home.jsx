@@ -14,7 +14,7 @@ export default function Home(){
     let countries = useSelector(state => state.countries)
     const filtrado = useSelector(state => state.filtered)
     // Conservamos el estado filtrado cuando volvemos al home
-    filtrado.length ? countries = filtrado : countries = countries
+    filtrado.length ? countries = filtrado : countries
     const error = useSelector(state => state.error)
     const [ order, setOrder ] = useState('')
     const [ currentPage, setCurrentPage ] = useState(1)
